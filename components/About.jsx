@@ -9,13 +9,13 @@ const About = () => {
     <>
       <main
         id="about"
-        className="flex flex-col xl:flex-row items-start space-y-10 md:space-y-10 xl:space-x-20 p-5 sm:p-10 md:p-14 lg:p-20 xl:p-24 border-b border-zinc-200 dark:border-zinc-800 w-full"
+        className="flex items-start py-40 max-w-7xl mx-auto"
       >
-        <div className="flex flex-col w-full">
+        <section className="flex flex-col bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 p-10 rounded-xl shadow-xl w-full h-full">
           <h1 className="text-start text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold">
             About
           </h1>
-          <p className="text-xs sm:text-sm md:text-base text-zinc-600 dark:text-zinc-500 my-5">
+          <p className="text-xs sm:text-sm md:text-base text-zinc-600 dark:text-zinc-500 my-10">
             <strong className="text-blue-500">Welcome to Gore Blogs,</strong> a
             personal space where I share my thoughts, experiences, and
             reflections on my daily life, education, and skill development.
@@ -35,7 +35,7 @@ const About = () => {
             <Button
               asChild
               variant="outline"
-              className="px-2 pr-4 transition hover:scale-105"
+              className="px-2 pr-4 rounded-lg dark:bg-zinc-800 hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition hover:scale-105"
             >
               <Link
                 href="https://www.linkedin.com/in/vinayak-gore-b85b7922a"
@@ -48,17 +48,7 @@ const About = () => {
               </Link>
             </Button>
           </div>
-        </div>
-        <div className="flex flex-col space-y-5 w-full mt-6 md:mt-0">
-          <Image
-            src="/card1.png"
-            alt="blog"
-            width={2000}
-            height={2000}
-            priority
-            className="h-auto rounded-xl transition hover:scale-110 border border-zinc-300 dark:border-zinc-700 shadow-xl w-full"
-          />
-        </div>
+        </section>
       </main>
     </>
   );

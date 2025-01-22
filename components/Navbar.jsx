@@ -24,11 +24,11 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 backdrop-blur-sm bg-transparent/[0.7] text-zinc-600 dark:text-zinc-300 shadow-md z-50 w-full">
+    <nav className="fixed top-0 backdrop-blur-sm bg-white/[0.8] dark:bg-zinc-900/[0.8] text-zinc-600 dark:text-zinc-300 z-50 w-full">
       <div className="mx-auto px-3 sm:px-10 py-2 flex justify-between items-center">
         <Link
           href="/"
-          className="flex items-center space-x-1 sm:space-x-2 text-xl sm:text-2xl text-white font-bold"
+          className="flex items-center space-x-1 sm:space-x-2 text-xl sm:text-2xl text-black dark:text-white font-bold"
         >
           <Image
             src="/logo.png"
@@ -44,7 +44,10 @@ const Navbar = () => {
           <div className="md:hidden ml-4">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" className="text-2xl text-white">
+                <Button
+                  variant="ghost"
+                  className="text-2xl text-black dark:text-white"
+                >
                   {!isOpen && <BsMenuButtonWideFill />}
                 </Button>
               </SheetTrigger>
@@ -78,19 +81,8 @@ const Navbar = () => {
                       className="py-5 px-6 rounded-lg shadow-lg hover:bg-blue-500 dark:hover:bg-blue-600 hover:text-white transition hover:scale-105"
                       asChild
                     >
-                      <Link href="/blogs" className="hover:text-white w-36">
+                      <Link href="/#blogs" className="hover:text-white w-36">
                         Blogs
-                      </Link>
-                    </Button>
-                  </li>
-                  <li>
-                    <Button
-                      variant="outline"
-                      className="py-5 px-6 rounded-lg shadow-lg hover:bg-blue-500 dark:hover:bg-blue-600 hover:text-white transition hover:scale-105"
-                      asChild
-                    >
-                      <Link href="/#contact" className="hover:text-white w-36">
-                        Contact
                       </Link>
                     </Button>
                   </li>
@@ -132,23 +124,27 @@ const Navbar = () => {
           } md:block`}
         >
           <li>
-            <Link href="/" className="py-2 hover:text-blue-500">
+            <Link
+              href="/"
+              className="py-2 text-black dark:text-white hover:text-blue-500 dark:hover:text-blue-500"
+            >
               Home
             </Link>
           </li>
           <li>
-            <Link href="/#about" className="py-2 hover:text-blue-500">
+            <Link
+              href="/#about"
+              className="py-2 text-black dark:text-white hover:text-blue-500 dark:hover:text-blue-500"
+            >
               About
             </Link>
           </li>
           <li>
-            <Link href="/blogs" className="py-2 hover:text-blue-500">
+            <Link
+              href="/#blogs"
+              className="py-2 text-black dark:text-white hover:text-blue-500 dark:hover:text-blue-500"
+            >
               Blogs
-            </Link>
-          </li>
-          <li>
-            <Link href="/#contact" className="py-2 hover:text-blue-500">
-              Contact
             </Link>
           </li>
           {!isOpen && (

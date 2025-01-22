@@ -21,7 +21,7 @@ const Hero = () => {
     <>
       <div className="animate-fade flex flex-col items-center w-full">
         <div className="flex flex-col items-center justify-center space-y-3 py-20 w-full h-full">
-          <h2 className="text-[2rem] sm:text-[6rem] lg:text-[10rem] xl:text-[14rem] bg-clip-text text-transparent bg-gradient-to-b from-black to-zinc-600 dark:from-white dark:to-zinc-500 font-extrabold">
+          <h2 className="text-[2rem] sm:text-[6rem] lg:text-[10rem] xl:text-[14rem] bg-clip-text text-transparent bg-gradient-to-b from-black to-zinc-500 dark:from-white dark:to-zinc-500 font-extrabold">
             Gore Blogs
           </h2>
           <div className="flex flex-col items-center text-center space-y-3">

@@ -1,71 +1,75 @@
 const blogs = {
-    name: 'blogs',
-    title: 'Blogs',
-    type: 'document',
+    name: "blogs",
+    title: "Blogs",
+    type: "document",
     fields: [
         {
-            name: 'title',
-            title: 'Title',
-            type: 'string',
-            validation: Rule => Rule.required().min(5),
+            name: "title",
+            title: "Title",
+            type: "string",
+            validation: (Rule) => Rule.required(),
         },
         {
-            name: 'slug',
-            title: 'Slug',
-            type: 'slug',
+            name: "slug",
+            title: "Slug",
+            type: "slug",
             options: {
-                source: 'title', // Automatically generate slug from the title field
-                maxLength: 96,   // Limit the slug length
+                source: "title",
+                maxLength: 96,
             },
-            validation: Rule => Rule.required(),
+            validation: (Rule) => Rule.required(),
         },
         {
-            title: 'Short Description',
-            name: 'desc',
-            type: 'text',
-            validation: Rule => Rule.required().min(5),
+            name: "date",
+            title: "Date",
+            type: "datetime",
+            validation: (Rule) => Rule.required(),
         },
         {
-            name: 'image',
-            title: 'Cover Image',
-            type: 'image',
+            name: "desc",
+            title: "Short Description",
+            type: "text",
+            validation: (Rule) => Rule.required(),
+        },
+        {
+            name: "coverImage",
+            title: "Cover Image",
+            type: "image",
             options: {
-                hotspot: true, // Enables image cropping in the studio
+                hotspot: true,
             },
-            validation: Rule => Rule.required(),
-        },
-        {
-            name: 'date',
-            title: 'Date',
-            type: 'datetime',
-            options: {
-                dateFormat: 'YYYY-MM-DD',
-            },
-            validation: Rule => Rule.required(),
-        },
-        {
-            name: 'content',
-            title: 'Content',
-            type: 'array',
-            of: [
-                { type: 'block' },
+            fields: [
                 {
-                    title: 'Image',
-                    name: 'image',
-                    type: 'image',
+                    name: "alt",
+                    title: "Alternative Text",
+                    type: "string",
+                    description: "Important for accessibility and SEO. Describe the image.",
+                },
+            ],
+        },
+        {
+            name: "content",
+            title: "Content",
+            type: "array",
+            of: [
+                { type: "block" },
+                { type: "code" },
+                {
+                    title: "Image",
+                    name: "image",
+                    type: "image",
                     options: {
-                        hotspot: true
+                        hotspot: true,
                     },
                     fields: [
                         {
-                            title: 'Attribution',
-                            name: 'attribution',
-                            type: 'string',
-                        }
-                    ]
+                            name: "alt",
+                            title: "Alternative Text",
+                            type: "string",
+                        },
+                    ],
                 },
             ],
-            validation: Rule => Rule.required(),
         },
     ],
 };
