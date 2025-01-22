@@ -15,7 +15,7 @@ const Hero = () => {
     Autoplay({ delay: 1500, stopOnInteraction: true })
   );
 
-  const imageSlider = ["/p1.png", "/p2.png", "/p3.png"];
+  const imageSlider = ["/card1.png", "/card2.png", "/card3.png", "/card4.png"];
 
   return (
     <>
