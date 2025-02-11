@@ -1,173 +1,137 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { BsMenuButtonWideFill } from "react-icons/bs";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetFooter,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { IoHomeOutline } from "react-icons/io5";
+import { SlUser } from "react-icons/sl";
+import { TfiWrite } from "react-icons/tfi";
 
 const Navbar = () => {
-  const { setTheme } = useTheme();
-  const [isOpen, setIsOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [isDark, setIsDark] = useState(theme === "dark");
+
+  // Handle theme toggle
+  const toggleTheme = () => {
+    setIsDark(!isDark);
+    setTheme(isDark ? "light" : "dark");
+  };
+
+  useEffect(() => {
+    setIsDark(theme === "dark");
+  }, [theme]);
 
   return (
-    <nav className="fixed top-0 backdrop-blur-sm bg-white/[0.8] dark:bg-zinc-900/[0.8] text-zinc-600 dark:text-zinc-300 z-50 w-full">
+    <nav className="fixed top-0 backdrop-blur-md bg-white/80 dark:bg-zinc-900/80 z-50 w-full">
       <div className="mx-auto px-3 sm:px-10 py-2 flex justify-between items-center">
+        {/* Logo */}
         <Link
           href="/"
-          className="flex items-center space-x-1 sm:space-x-2 text-xl sm:text-2xl text-black dark:text-white font-bold"
+          className="flex items-center space-x-2 text-xl sm:text-2xl font-bold"
         >
           <Image
             src="/logo.png"
             alt="logo"
             width={50}
             height={50}
-            priority
             className="w-8 sm:w-10"
           />
           <span>Gore Blogs</span>
         </Link>
-        <div className="flex items-center">
-          <div className="md:hidden ml-4">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="text-2xl text-black dark:text-white"
-                >
-                  {!isOpen && <BsMenuButtonWideFill />}
-                </Button>
-              </SheetTrigger>
-              <SheetContent className="flex flex-col items-start">
-                <ul className="flex flex-col items-start justify-start space-y-3">
-                  <li>
+
+        {/* Mobile Menu */}
+        <div className="md:hidden ml-4">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" className="text-2xl">
+                <BsMenuButtonWideFill />
+              </Button>
+            </SheetTrigger>
+            <SheetContent className="flex flex-col items-start">
+              <ul className="flex flex-col space-y-4">
+                {[
+                  {
+                    name: "Home",
+                    icon: <IoHomeOutline className="h-5 w-5" />,
+                    link: "/#home",
+                  },
+                  {
+                    name: "About",
+                    icon: <SlUser className="h-5 w-5" />,
+                    link: "/#about",
+                  },
+                  {
+                    name: "Blogs",
+                    icon: <TfiWrite className="h-5 w-5" />,
+                    link: "/#blogs",
+                  },
+                ].map((item, index) => (
+                  <li key={index}>
                     <Button
                       variant="outline"
-                      className="py-5 px-6 rounded-lg shadow-lg hover:bg-blue-500 dark:hover:bg-blue-600 hover:text-white transition hover:scale-105"
+                      className="p-6 text-base w-40 flex items-center justify-start gap-3"
                       asChild
                     >
-                      <Link href="/" className="w-36">
-                        Home
+                      <Link href={item.link}>
+                        {item.icon}
+                        {item.name}
                       </Link>
                     </Button>
                   </li>
-                  <li>
-                    <Button
-                      variant="outline"
-                      className="py-5 px-6 rounded-lg shadow-lg hover:bg-blue-500 dark:hover:bg-blue-600 hover:text-white transition hover:scale-105"
-                      asChild
-                    >
-                      <Link href="/#about" className="hover:text-white w-36">
-                        About
-                      </Link>
-                    </Button>
-                  </li>
-                  <li>
-                    <Button
-                      variant="outline"
-                      className="py-5 px-6 rounded-lg shadow-lg hover:bg-blue-500 dark:hover:bg-blue-600 hover:text-white transition hover:scale-105"
-                      asChild
-                    >
-                      <Link href="/#blogs" className="hover:text-white w-36">
-                        Blogs
-                      </Link>
-                    </Button>
-                  </li>
-                </ul>
-                <SheetFooter>
-                  <DropdownMenu className="hidden sm:flex">
-                    <DropdownMenuTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className="flex items-center justify-between py-5 w-36"
-                      >
-                        <div className="flex">
-                          <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                          <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                        </div>
-                        <span>Dark Mode</span>
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem onClick={() => setTheme("light")}>
-                        Light
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setTheme("dark")}>
-                        Dark
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setTheme("system")}>
-                        System
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </SheetFooter>
-              </SheetContent>
-            </Sheet>
-          </div>
+                ))}
+              </ul>
+
+              {/* Dark Mode Toggle Button */}
+              <Button
+                variant="outline"
+                className="w-40 flex justify-center items-center text-base p-6"
+                onClick={() => setTheme(isDark ? "light" : "dark")}
+              >
+                {isDark ? (
+                  <>
+                    <SunIcon className="h-6 w-6 mr-3" />
+                    <span>Light Mode</span>
+                  </>
+                ) : (
+                  <>
+                    <MoonIcon className="h-6 w-6 mr-3" />
+                    <span>Dark Mode</span>
+                  </>
+                )}
+              </Button>
+            </SheetContent>
+          </Sheet>
         </div>
-        <ul
-          className={`md:flex md:items-center md:space-x-5 text-white ${
-            !setIsOpen ? "block" : "hidden"
-          } md:block`}
-        >
+
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex items-center space-x-5">
+          {["Home", "About", "Blogs"].map((item, index) => (
+            <li key={index}>
+              <Link
+                href={`/#${item.toLowerCase()}`}
+                className="py-2 hover:text-blue-500 dark:hover:text-blue-400 transition"
+              >
+                {item}
+              </Link>
+            </li>
+          ))}
           <li>
-            <Link
-              href="/"
-              className="py-2 text-black dark:text-white hover:text-blue-500 dark:hover:text-blue-500"
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="ml-4 transition-all duration-300"
             >
-              Home
-            </Link>
+              {isDark ? (
+                <SunIcon className="h-10 w-10 p-2 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-800 dark:hover:bg-zinc-800 rounded-full transition-all duration-300" />
+              ) : (
+                <MoonIcon className="h-10 w-10 p-2 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-800 dark:hover:bg-zinc-800 rounded-full transition-all duration-300" />
+              )}
+            </button>
           </li>
-          <li>
-            <Link
-              href="/#about"
-              className="py-2 text-black dark:text-white hover:text-blue-500 dark:hover:text-blue-500"
-            >
-              About
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/#blogs"
-              className="py-2 text-black dark:text-white hover:text-blue-500 dark:hover:text-blue-500"
-            >
-              Blogs
-            </Link>
-          </li>
-          {!isOpen && (
-            <DropdownMenu className="hidden sm:flex">
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="icon">
-                  <SunIcon className="h-[1.2rem] w-[1.2rem] text-black dark:text-white rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                  <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] text-black dark:text-white rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("light")}>
-                  Light
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>
-                  Dark
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("system")}>
-                  System
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          )}
         </ul>
       </div>
     </nav>

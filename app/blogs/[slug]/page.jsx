@@ -22,9 +22,7 @@ import {
 } from "@/components/ui/tooltip"
 import {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -171,7 +169,7 @@ const Page = ({ params }) => {
       image: ({ value }) => (
         <Image
           src={urlFor(value.asset).url()}
-          alt={value.attribution || "Blog image"}
+          alt={value.title || "Blog image"}
           width={1500}
           height={500}
           priority
@@ -182,19 +180,19 @@ const Page = ({ params }) => {
     },
     block: {
       h1: ({ children }) => (
-        <h1 className="text-4xl font-medium text-zinc-200 my-2">{children}</h1>
+        <h1 className="text-4xl font-medium my-2">{children}</h1>
       ),
       h2: ({ children }) => (
-        <h2 className="text-3xl font-medium text-zinc-200 my-2">{children}</h2>
+        <h2 className="text-3xl font-medium my-2">{children}</h2>
       ),
       h3: ({ children }) => (
-        <h3 className="text-2xl font-medium text-zinc-200 my-2">{children}</h3>
+        <h3 className="text-2xl font-medium my-2">{children}</h3>
       ),
       h4: ({ children }) => (
-        <h4 className="text-xl font-medium text-zinc-200 my-2">{children}</h4>
+        <h4 className="text-xl font-medium my-2">{children}</h4>
       ),
       h5: ({ children }) => (
-        <h5 className="text-lg font-light text-white my-2 py-1 rounded-lg bg-yellow-500/[0.3] whitespace-nowrap overflow-auto opacity-50 w-full">
+        <h5 className="text-lg font-light my-2 py-1 rounded-lg bg-yellow-500/[0.3] whitespace-nowrap overflow-auto w-full">
           <span className="sticky left-0 z-20 py-2 px-3 rounded-lg rounded-r-none bg-gradient-to-r from-yellow-500 to-yellow-400">✦</span>
           <span className="p-2">{children}</span>
         </h5>
@@ -202,6 +200,7 @@ const Page = ({ params }) => {
       normal: ({ children }) => (
         <p className="text-base text-zinc-400 leading-relaxed mb-2">{children}</p>
       ),
+      hr: () => <hr className="my-10 border-t border-zinc-800" />,
     },
     list: {
       bullet: ({ children }) => (
@@ -298,7 +297,7 @@ const Page = ({ params }) => {
           {blog.previousPost ? (
             <Link
               href={`/blogs/${blog.previousPost.slug.current}`}
-              className="flex items-center space-x-2 hover:text-zinc-200 focus:text-blue-600 p-2 leading-3 pl-3 pr-5 hover:bg-zinc-900 rounded-full hover:scale-105 transition-transform"
+              className="flex items-center space-x-2 hover:focus:text-blue-600 p-2 leading-3 pl-3 pr-5 hover:bg-zinc-900 rounded-full hover:scale-105 transition-transform"
             >
               <TfiControlBackward className="w-6 h-6" />
               <span>Back</span>
@@ -309,7 +308,7 @@ const Page = ({ params }) => {
           {blog.nextPost ? (
             <Link
               href={`/blogs/${blog.nextPost.slug.current}`}
-              className="flex items-center space-x-2 hover:text-zinc-200 focus:text-blue-600 p-2 leading-3 pr-3 pl-5 hover:bg-zinc-900 rounded-full hover:scale-105 transition-transform"
+              className="flex items-center space-x-2 hover:focus:text-blue-600 p-2 leading-3 pr-3 pl-5 hover:bg-zinc-900 rounded-full hover:scale-105 transition-transform"
             >
               <span>Next</span>
               <TfiControlForward className="w-6 h-6" />
@@ -351,7 +350,7 @@ const Page = ({ params }) => {
             </div>
           </div>
 
-          <div className="flex flex-col items-start space-y-5 text-zinc-200">
+          <div className="flex flex-col items-start space-y-5">
             <PortableText value={blog.content} components={components} />
           </div>
           <div className="inline-flex items-center p-2 mt-10 space-x-2 text-zinc-400 dark:text-zinc-600 border border-zinc-200 dark:border-zinc-800 rounded-full hover:scale-110 transition-transform hover:shadow-lg shadow-zinc-300 dark:shadow-black">
@@ -493,8 +492,6 @@ const Page = ({ params }) => {
             )}
           </div>
         </div>
-
-
       </main>
     </>
   );
