@@ -4,29 +4,25 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; // Shadcn Card
+import { FaRocket, FaBookOpen, FaUsers } from "react-icons/fa"; // Icons
 
 const Hero = () => {
   return (
-    <main className="relative w-full min-h-screen p-36 pb-0 flex flex-col items-center justify-center bg-gradient-to-br from-blue-100 via-white to-blue-300 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
-      {/* 🔥 Animated Background Glow */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/2 w-[90vw] h-[90vw] bg-blue-500 dark:bg-purple-500 opacity-40 blur-[150px] -translate-x-1/2"></div>
-        <div className="absolute bottom-0 right-1/2 w-[70vw] h-[70vw] bg-indigo-400 dark:bg-blue-600 opacity-50 blur-[120px] translate-x-1/2"></div>
-      </div>
-
-      {/* 🌟 Animated Main Content */}
+    <main className="relative w-full flex flex-col items-center justify-center overflow-hidden">
+      {/* 🌟 Main Content */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
-        className="relative z-10 text-center w-full"
+        className="relative z-10 text-center w-full px-4 sm:px-6 lg:px-8"
       >
         {/* 🚀 Animated Title */}
         <motion.h1
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
-          className="text-[5rem] sm:text-[9rem] lg:text-[11rem] xl:text-[13rem] leading-none py-5 font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-black to-zinc-600 dark:from-white dark:to-zinc-500 drop-shadow-xl whitespace-nowrap w-full"
+          className="text-5xl sm:text-6xl lg:text-[12rem] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 drop-shadow-xl pb-10"
         >
           Gore Blogs
         </motion.h1>
@@ -36,21 +32,17 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.4, ease: "easeOut", delay: 0.4 }}
-          className="text-[1rem] sm:text-[1.4rem] text-gray-800 dark:text-gray-300 max-w-4xl mx-auto mt-5 tracking-wide leading-relaxed"
+          className="text-lg sm:text-2xl max-w-5xl mx-auto mt-6 tracking-wide leading-relaxed"
         >
-          Explore{" "}
-          <span className="text-blue-600 dark:text-blue-400">
-            personal stories, travel experiences, career insights,
+          Dive into a world of{" "}
+          <span className="text-blue-500 font-semibold">
+            personal stories, travel adventures, career insights,
           </span>{" "}
-          and
-          <span className="text-cyan-700 dark:text-cyan-400">
-            {" "}
-            the latest in technology.
-          </span>
-          A curated space for{" "}
-          <span className="text-purple-600 dark:text-purple-400">
-            thoughtful discussions and valuable knowledge sharing.
-          </span>
+          and{" "}
+          <span className="text-purple-500 font-semibold">
+            cutting-edge technology.
+          </span>{" "}
+          Join a community of passionate learners and creators.
         </motion.p>
 
         {/* 🚀 Call to Action */}
@@ -61,54 +53,83 @@ const Hero = () => {
           className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Button
-            className="bg-blue-600 dark:bg-blue-500 text-white p-7 px-10 text-xl font-medium rounded-lg shadow-lg transition duration-300 ease-in-out hover:bg-blue-700 dark:hover:bg-blue-400 hover:scale-105"
+            className="bg-blue-600 text-white px-8 py-6 text-lg font-medium rounded-lg shadow-lg transition duration-300 ease-in-out hover:bg-blue-700 hover:scale-105"
             asChild
           >
-            <Link href="/#blogs">Start Reading 📚</Link>
+            <Link href="/#blogs">
+              <FaBookOpen className="mr-2" />
+              Start Reading
+            </Link>
           </Button>
 
           <Button
-            className="bg-gray-800 dark:bg-gray-700 text-white p-7 px-10 text-xl font-medium rounded-lg shadow-lg transition duration-300 ease-in-out hover:bg-gray-900 dark:hover:bg-gray-600 hover:scale-105"
+            className="bg-purple-600 text-white px-8 py-6 text-lg font-medium rounded-lg shadow-lg transition duration-300 ease-in-out hover:bg-purple-700 hover:scale-105"
             asChild
           >
-            <Link href="/contact">Join Community 💬</Link>
+            <Link href="/contact">
+              <FaUsers className="mr-2" />
+              Join Community
+            </Link>
           </Button>
         </motion.div>
 
-        {/* ⭐ Social Proof */}
+        {/* ⭐ Featured Cards */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.8, ease: "easeOut", delay: 0.4 }}
-          className="mt-28 py-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-full flex flex-wrap items-center justify-center text-xl font-semibold gap-6 w-full"
+          transition={{ duration: 1.8, ease: "easeOut", delay: 0.8 }}
+          className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
         >
-          <div className="">
-            ⭐ Over{" "}
-            <span className="text-green-500">50,000+</span>{" "}
-            readers worldwide
-          </div>
-          <div className="">
-            🎓 Learn from **Expert Developers
-          </div>
-          <div className="">
-            🔥 Daily Updated Content
-          </div>
+          {[
+            {
+              icon: <FaRocket className="h-8 w-8 text-blue-600" />,
+              title: "Daily Insights",
+              description: "Get the latest updates on technology and trends.",
+            },
+            {
+              icon: <FaBookOpen className="h-8 w-8 text-purple-600" />,
+              title: "Curated Content",
+              description: "Handpicked articles for your learning journey.",
+            },
+            {
+              icon: <FaUsers className="h-8 w-8 text-indigo-600" />,
+              title: "Community Driven",
+              description: "Join discussions and share your knowledge.",
+            },
+          ].map((card, index) => (
+            <Card
+              key={index}
+              className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              <CardHeader>
+                <div className="flex items-center justify-center w-12 h-12 bg-blue-50 rounded-full">
+                  {card.icon}
+                </div>
+                <CardTitle className="mt-4 text-xl font-bold text-gray-900">
+                  {card.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-700">{card.description}</p>
+              </CardContent>
+            </Card>
+          ))}
         </motion.div>
       </motion.div>
 
       {/* 📸 Animated Image Section */}
       <motion.div
         initial={{ opacity: 0, y: 400 }}
-        animate={{ opacity: 1, y: 100 }}
-        transition={{ duration: 7, ease: "easeOut", delay: 0.5 }}
-        className="relative z-10 w-full"
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
+        className="relative z-10 w-full max-w-6xl my-16 sm:my-24"
       >
         <Image
           src="/card.png"
           alt="Gore Blogs"
           width={1200}
           height={600}
-          className="w-full h-full rounded-3xl shadow-2xl shadow-purple-700"
+          className="w-full h-full rounded-3xl shadow-2xl shadow-purple-500"
         />
       </motion.div>
     </main>

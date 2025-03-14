@@ -2,14 +2,15 @@
 import React, { useState, useEffect } from "react";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"; // Shadcn Button
 import { BsMenuButtonWideFill } from "react-icons/bs";
 import Link from "next/link";
 import Image from "next/image";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"; // Shadcn Sheet
 import { IoHomeOutline } from "react-icons/io5";
 import { SlUser } from "react-icons/sl";
 import { TfiWrite } from "react-icons/tfi";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
@@ -25,9 +26,15 @@ const Navbar = () => {
     setIsDark(theme === "dark");
   }, [theme]);
 
+  // Framer Motion variants for animations
+  const itemVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
-    <nav className="fixed top-0 backdrop-blur-md bg-white/80 dark:bg-zinc-900/80 z-50 w-full">
-      <div className="mx-auto px-3 sm:px-10 py-2 flex justify-between items-center">
+    <nav className="fixed top-0 backdrop-blur-md bg-white/80 dark:bg-zinc-900/80 z-50 w-full border-b border-gray-200 dark:border-zinc-700">
+      <div className="mx-auto px-3 sm:px-10 py-3 flex justify-between items-center">
         {/* Logo */}
         <Link
           href="/"
@@ -40,19 +47,27 @@ const Navbar = () => {
             height={50}
             className="w-8 sm:w-10"
           />
-          <span>Gore Blogs</span>
+          <motion.span
+            initial="hidden"
+            animate="visible"
+            variants={itemVariants}
+            transition={{ duration: 0.5 }}
+            className="text-gray-900 dark:text-white"
+          >
+            Gore Blogs
+          </motion.span>
         </Link>
 
         {/* Mobile Menu */}
         <div className="md:hidden ml-4">
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" className="text-2xl">
-                <BsMenuButtonWideFill />
+              <Button variant="ghost" size="icon">
+                <BsMenuButtonWideFill className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent className="flex flex-col items-start">
-              <ul className="flex flex-col space-y-4">
+            <SheetContent side="right" className="bg-white dark:bg-zinc-900">
+              <ul className="flex flex-col space-y-4 w-full mt-6">
                 {[
                   {
                     name: "Home",
@@ -70,10 +85,16 @@ const Navbar = () => {
                     link: "/#blogs",
                   },
                 ].map((item, index) => (
-                  <li key={index}>
+                  <motion.li
+                    key={index}
+                    initial="hidden"
+                    animate="visible"
+                    variants={itemVariants}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
                     <Button
-                      variant="outline"
-                      className="p-6 text-base w-40 flex items-center justify-start gap-3"
+                      variant="ghost"
+                      className="w-full flex items-center justify-start gap-3 p-3 text-base"
                       asChild
                     >
                       <Link href={item.link}>
@@ -81,28 +102,36 @@ const Navbar = () => {
                         {item.name}
                       </Link>
                     </Button>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
 
               {/* Dark Mode Toggle Button */}
-              <Button
-                variant="outline"
-                className="w-40 flex justify-center items-center text-base p-6"
-                onClick={() => setTheme(isDark ? "light" : "dark")}
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={itemVariants}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="w-full mt-4"
               >
-                {isDark ? (
-                  <>
-                    <SunIcon className="h-6 w-6 mr-3" />
-                    <span>Light Mode</span>
-                  </>
-                ) : (
-                  <>
-                    <MoonIcon className="h-6 w-6 mr-3" />
-                    <span>Dark Mode</span>
-                  </>
-                )}
-              </Button>
+                <Button
+                  variant="ghost"
+                  className="w-full flex justify-center items-center gap-3 p-3 text-base"
+                  onClick={toggleTheme}
+                >
+                  {isDark ? (
+                    <>
+                      <SunIcon className="h-6 w-6" />
+                      <span>Light Mode</span>
+                    </>
+                  ) : (
+                    <>
+                      <MoonIcon className="h-6 w-6" />
+                      <span>Dark Mode</span>
+                    </>
+                  )}
+                </Button>
+              </motion.div>
             </SheetContent>
           </Sheet>
         </div>
@@ -110,28 +139,41 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center space-x-5">
           {["Home", "About", "Blogs"].map((item, index) => (
-            <li key={index}>
+            <motion.li
+              key={index}
+              initial="hidden"
+              animate="visible"
+              variants={itemVariants}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
               <Link
                 href={`/#${item.toLowerCase()}`}
-                className="py-2 hover:text-blue-500 dark:hover:text-blue-400 transition"
+                className="py-2 px-4 hover:text-blue-500 dark:hover:text-blue-400 transition-colors duration-300"
               >
                 {item}
               </Link>
-            </li>
+            </motion.li>
           ))}
-          <li>
+          <motion.li
+            initial="hidden"
+            animate="visible"
+            variants={itemVariants}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
             {/* Theme Toggle Button */}
-            <button
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={toggleTheme}
-              className="ml-4 transition-all duration-300"
+              className="ml-4"
             >
               {isDark ? (
-                <SunIcon className="h-10 w-10 p-2 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-800 dark:hover:bg-zinc-800 rounded-full transition-all duration-300" />
+                <SunIcon className="h-6 w-6" />
               ) : (
-                <MoonIcon className="h-10 w-10 p-2 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-800 dark:hover:bg-zinc-800 rounded-full transition-all duration-300" />
+                <MoonIcon className="h-6 w-6" />
               )}
-            </button>
-          </li>
+            </Button>
+          </motion.li>
         </ul>
       </div>
     </nav>
