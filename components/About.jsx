@@ -10,21 +10,21 @@ const About = () => {
   return (
     <main
       id="about"
-      className="flex items-center justify-center relative m-auto p-40 w-full"
+      className="flex items-center justify-center relative bg-transparent m-auto p-40 w-full" // Added zinc background
     >
       {/* 🌟 About Section */}
       <motion.section
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="flex flex-col p-20 rounded-3xl shadow-2xl bg-white w-full"
+        className="flex flex-col p-20 rounded-3xl shadow-2xl shadow-purple-600 bg-gradient-to-b from-white to-purple-300 dark:from-zinc-900 dark:to-purple-950 w-full" // Changed to zinc background
       >
         {/* 🚀 Title */}
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] uppercase text-center font-extrabold text-black"
+          className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] uppercase text-center font-extrabold bg-gradient-to-r from-purple-500 to-violet-600 bg-clip-text text-transparent" // Added purple gradient text
         >
           Vinayak Gore
         </motion.h1>
@@ -36,7 +36,9 @@ const About = () => {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
           className="mt-6 sm:mt-8 md:mt-10 flex justify-center"
         >
-          <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 relative rounded-full overflow-hidden border-4 border-blue-600">
+          <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 relative rounded-full overflow-hidden border-4 border-purple-500">
+            {" "}
+            {/* Changed border to purple */}
             <Image
               src="/vinu.png" // Replace with your profile image
               alt="Profile Picture"
@@ -51,21 +53,23 @@ const About = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
-          className="text-sm sm:text-base md:text-xl text-black mt-10 sm:mt-16 md:my-20 leading-relaxed text-center"
+          className="text-sm sm:text-base md:text-2xl mt-10 sm:mt-16 md:my-20 leading-relaxed text-center" // Changed text color to zinc
         >
-          <strong className="text-sky-500 text-3xl">Welcome to Gore Blogs,</strong> a
-          personal space where I share my thoughts, experiences, and reflections
-          on my daily life, education, and skill development. Here, I document
-          the highs and lows of my journey, from the challenges I face while
-          learning new things to the joy of small victories in my everyday life.
-          Each post is an opportunity for me to connect with you, whether I am
-          recounting a funny incident that made me laugh or sharing insights
-          from my educational pursuits. My goal is to create a relatable and
-          engaging platform that resonates with readers, offering glimpses into
-          the moments that shape us. Join me as I navigate through various
-          topics, explore the beauty of everyday experiences, and find humor in
-          life is little quirks. I hope my stories inspire you to reflect on
-          your own journey and embrace the wonderful chaos of life !
+          <strong className="text-purple-500 text-4xl">
+            Welcome to Gore Blogs,
+          </strong>{" "}
+          a personal space where I share my thoughts, experiences, and
+          reflections on my daily life, education, and skill development. Here,
+          I document the highs and lows of my journey, from the challenges I
+          face while learning new things to the joy of small victories in my
+          everyday life. Each post is an opportunity for me to connect with you,
+          whether I am recounting a funny incident that made me laugh or sharing
+          insights from my educational pursuits. My goal is to create a
+          relatable and engaging platform that resonates with readers, offering
+          glimpses into the moments that shape us. Join me as I navigate through
+          various topics, explore the beauty of everyday experiences, and find
+          humor in life is little quirks. I hope my stories inspire you to
+          reflect on your own journey and embrace the wonderful chaos of life !
         </motion.p>
 
         {/* 🚀 Stats Section */}
@@ -84,15 +88,15 @@ const About = () => {
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 * index }}
-              className="p-10 bg-gradient-to-br from-teal-500 to-cyan-500 text-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center"
+              transition={{
+                duration: 0.8,
+                ease: "easeOut",
+                delay: 0.2 * index,
+              }}
+              className="p-10 bg-gradient-to-br from-purple-600 to-cyan-500 text-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center"
             >
-              <p className="text-3xl sm:text-7xl font-bold">
-                {stat.value}
-              </p>
-              <p className="text-lg sm:text-2xl mt-5">
-                {stat.label}
-              </p>
+              <p className="text-3xl sm:text-7xl font-bold">{stat.value}</p>
+              <p className="text-lg sm:text-2xl mt-5">{stat.label}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -125,17 +129,17 @@ const About = () => {
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 * index }}
+              transition={{
+                duration: 0.8,
+                ease: "easeOut",
+                delay: 0.2 * index,
+              }}
             >
               <Button
                 asChild
                 className="p-7 rounded-lg bg-white hover:bg-gray-100 transition-all duration-300 hover:scale-105 flex items-center gap-5"
               >
-                <Link
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener"
-                >
+                <Link href={social.href} target="_blank" rel="noopener">
                   {social.icon}
                   <span className="text-xl text-gray-900">{social.name}</span>
                 </Link>

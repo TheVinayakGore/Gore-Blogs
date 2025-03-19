@@ -19,7 +19,7 @@ import Image from "next/image";
 
 const Gallery = () => {
   const plugin = React.useRef(
-    Autoplay({ delay: 15000, stopOnInteraction: true })
+    Autoplay({ delay: 5000, stopOnInteraction: true })
   );
 
   const imageSlider = [
@@ -50,7 +50,7 @@ const Gallery = () => {
   ];
 
   return (
-    <main className="w-full h-full relative">
+    <main className="bg-transparent w-full h-full relative">
       <Carousel
         plugins={[plugin.current]}
         className="w-full h-full"
@@ -62,36 +62,36 @@ const Gallery = () => {
           {imageSlider.map((item) => (
             <CarouselItem
               key={item.image}
-              className="relative min-h-screen w-full my-60 flex items-center justify-center"
+              className="relative min-h-screen w-full flex items-center justify-center"
             >
               <motion.div
                 initial={{
-                  scale: 0.3,
-                  opacity: 0.5,
+                  scale: 0.1,
+                  opacity: 0.3,
                   rotateZ: 0,
                   filter: "blur(10px)",
                 }}
                 whileInView={{
                   scale: 1,
                   opacity: 1,
-                  rotateZ: 360,
+                  rotateX: 360,
                   filter: "blur(0px)",
                 }}
-                transition={{ duration: 3 }}
+                transition={{ duration: 1.3 }}
                 className="absolute inset-0 flex items-center justify-center z-20 w-auto h-auto"
               >
-                <BackgroundGradient className="p-6 sm:p-8 md:p-10 rounded-4xl h-auto">
+                <BackgroundGradient className="p-5 rounded-4xl h-auto">
                   <Card className="bg-transparent border-none shadow-none">
                     <CardHeader>
                       <CardTitle className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white">
                         {item.title}
                       </CardTitle>
-                      <CardDescription className="text-lg sm:text-xl md:text-2xl text-white/80 mt-4 max-w-2xl">
+                      <CardDescription className="text-2xl text-white/80 max-w-3xl">
                         {item.description}
                       </CardDescription>
                     </CardHeader>
-                    <CardContent className="flex flex-col items-start justify-start mt-20 gap-14 w-[80rem]">
-                      <div className="w-full h-[400px] sm:h-[500px] md:h-[600px] relative rounded-3xl overflow-hidden">
+                    <CardContent className="flex flex-col items-start justify-start mt-5 gap-14 w-[60rem]">
+                      <div className="w-full h-auto relative rounded-3xl overflow-hidden">
                         <Image
                           src={item.image}
                           alt={item.title}
@@ -101,13 +101,6 @@ const Gallery = () => {
                           priority
                         />
                       </div>
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="px-8 py-3 bg-white text-black rounded-lg font-medium text-lg hover:bg-gray-100 transition-all"
-                      >
-                        Learn More
-                      </motion.button>
                     </CardContent>
                   </Card>
                 </BackgroundGradient>
